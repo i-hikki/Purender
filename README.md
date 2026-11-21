@@ -17,7 +17,7 @@ Satu scene = satu video pendek. Kamu menulis deskripsi scene dan dialognya di `s
 ## Struktur
 
 ```
-basePlate/
+Purender/
 ├── scene.md       daftar scene (judul, promp, mp3, reff, status)
 ├── Rules.md       aturan: library, penulisan, larangan, API kit
 ├── route.md       arahan singkat untuk agent
