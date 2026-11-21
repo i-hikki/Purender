@@ -11,8 +11,8 @@ Tanpa aset gambar, tanpa editor, tanpa library berat. Semua frame dihitung dari 
 
 </div>
 
-## Ide
-Satu scene = satu video pendek. Kamu menulis deskripsi scene dan dialognya di `scene.md`. Agent membaca `route.md`, mengerjakan scene satu per satu, dan menyimpan MP4 ke `output/`. Dialog direkam sendiri di editor video, jadi animasi dan suara bisa disinkronkan per scene.
+## Ide konsep
+Satu scene = satu video pendek. Kamu menulis deskripsi scene dan dialognya di `scene.md`. Agent membaca `route.md`, mengerjakan scene satu per satu, menyimpan MP4 ke `output/`. Dialog kamu rekam sendiri di editor video, atau apapun itu sumber MP3 nya, Jadi animasi dan suara bisa disinkronkan per scene.
 
 ## Struktur
 
@@ -38,10 +38,11 @@ python main.py
 
 Hasil: `output/scene_01_bendera.mp4`. Instalasi lengkap (Windows, Linux, macOS, Termux) ada di [tutorial.md](tutorial.md).
 
-## Memakai agent
-1. Tulis scene di `scene.md`.
-2. Ketik ke agent: `baca route.md`.
-3. Agent menulis `src/scene_NN_slug.py`, menjalankan `python main.py`, lalu menandai scene `selesai`.
+## Cara pakai
+1. Tulis scene dan berkreasilah di [scene.md](scene.md).
+2. Lempar ke agent dan suruh: `baca route.md`.
+3. Agent menulis `src/scene_NN_slug.py`, menandai scene `selesai`.
+4. Kamu menjalankan `python main.py`.
 
 Aturan yang dipatuhi agent ada di [Rules.md](Rules.md): hanya `numpy`, tanpa komentar di kode render, satu file scene di `src/`.
 
