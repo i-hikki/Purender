@@ -128,6 +128,57 @@ def foot_path(p, amp, lift):
     return -amp + 2 * amp * s * s * (3 - 2 * s), lift * math.sin(math.pi * s)
 
 
+SIZE = {"landscape": (960, 540), "portrait": (540, 960), "square": (720, 720)}
+
+
+def lerp(a, b, f):
+    return a + (b - a) * f
+
+
+def ease(f):
+    f = min(max(f, 0.0), 1.0)
+    return f * f * (3 - 2 * f)
+
+
+def keys(t, pts, easing=False):
+    def arr(v):
+        a = np.array(v, np.float32)
+        return float(a) if a.ndim == 0 else a
+
+    if t <= pts[0][0]:
+        return arr(pts[0][1])
+    if t >= pts[-1][0]:
+        return arr(pts[-1][1])
+    for i in range(len(pts) - 1):
+        t0, t1 = pts[i][0], pts[i + 1][0]
+        if t0 <= t <= t1:
+            f = (t - t0) / (t1 - t0)
+            if easing:
+                f = ease(f)
+            a, b = np.array(pts[i][1], np.float32), np.array(pts[i + 1][1], np.float32)
+            r = a + (b - a) * f
+            return float(r) if r.ndim == 0 else r
+
+
+class Cam:
+    def __init__(self, cx, cy, z=1.0):
+        self.cx, self.cy, self.z = cx, cy, z
+
+    def eff(self, f=1.0):
+        return 1 + (self.z - 1) * f, W / 2 + (self.cx - W / 2) * f, H / 2 + (self.cy - H / 2) * f
+
+    def pt(self, p, f=1.0):
+        z, cx, cy = self.eff(f)
+        return (p[0] - cx) * z + W / 2, (p[1] - cy) * z + H / 2
+
+    def r(self, r, f=1.0):
+        return r * self.eff(f)[0]
+
+    def grid(self, f=1.0):
+        z, cx, cy = self.eff(f)
+        return (X - W / 2) / z + cx, (Y - H / 2) / z + cy
+
+
 def encode(frame, w, h, fps, dur, out):
     if shutil.which("ffmpeg") is None:
         sys.exit("ffmpeg tidak ditemukan. Lihat tutorial.md bagian instalasi.")

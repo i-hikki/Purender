@@ -58,14 +58,18 @@ python main.py
 ```
 Di Termux dan Linux/macOS tanpa alias, pakai `python3 main.py`.
 `main.py` menjalankan satu-satunya file di `src/` dan menyimpan MP4 ke `output/` dengan nama yang sama dengan file scene.
+Bawaan repo: `src/` berisi `scene_01_wide.py`. Contoh scene 2 sampai 4 ada di `examples/`.
 
 ## Alur kerja
-1. Tulis scene di `scene.md` (format ada di bagian atas file itu).
+1. Tulis video di `scene.md`: bagian Global (`skala`, `fps`, `gaya`), lalu scene bernomor dengan `waktu=`, `promp=`, `mp3=`.
 2. Taruh gambar atau catatan acuan di `ref/` bila perlu, lalu tulis path-nya di `reff=`.
-3. Beri tahu agent: **"baca route.md"**.
-4. Agent mengerjakan scene bernomor terkecil yang `status= belum`, menjalankan `python main.py`, lalu menandainya `selesai`.
-5. Ambil MP4 dari `output/`, rekam atau dubbing `mp3=` di editor video favoritmu, lalu satukan.
-6. Ketik "lanjut" untuk scene berikutnya.
+3. Beri tahu agent: **"baca route.md, kerjakan scene 1"**.
+4. Agent mengeluarkan satu file kode. Simpan di `src/` (hapus file scene sebelumnya).
+5. Jalankan `python main.py`, periksa hasilnya di `output/`, lalu ubah `status= selesai` di `scene.md`.
+6. Ulangi dari langkah 3 untuk scene berikutnya.
+7. Satukan klip dan rekam atau dubbing `mp3=` di editor video favoritmu.
+
+Bila ada error, tempel pesan error ke agent dengan nomor scene-nya.
 
 ## Masalah umum
 | Pesan | Penyebab / solusi |

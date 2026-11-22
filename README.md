@@ -12,7 +12,7 @@ Tanpa aset gambar, tanpa editor, tanpa library berat. Semua frame dihitung dari 
 </div>
 
 ## Ide konsep
-Satu scene = satu video pendek. Kamu menulis deskripsi scene dan dialognya di `scene.md`. Agent membaca `route.md`, mengerjakan scene satu per satu, menyimpan MP4 ke `output/`. Dialog kamu dubbing sendiri di editor video, atau apapun itu sumber MP3 nya, Jadi animasi dan suara bisa disinkronkan per scene.
+Satu `scene.md` = satu video. Video dipecah jadi beberapa scene bernomor, panjang tiap scene bebas (`waktu= 0:03-0:05`). Kamu menulis deskripsi dan dialognya di `scene.md`. Agent membaca `route.md` dan menulis satu file kode per scene. Kamu merender tiap scene jadi klip MP4 di `output/`, lalu menyatukannya di editor video bersama dubbing atau MP3 apa pun. Semua gerak dihitung dari waktu video utuh, jadi antar klip tetap nyambung.
 
 ## Struktur
 
@@ -23,8 +23,10 @@ Purender/
 ├── route.md       arahan singkat untuk agent
 ├── tutorial.md    instalasi (desktop & Termux) dan cara pakai
 ├── main.py        menjalankan satu file di src/
-├── lib/kit.py     primitif gambar bersama (lingkaran, kapsul, IK, encoder)
+├── lib/kit.py     primitif gambar bersama (kapsul, elips, IK, kamera, keyframe, encoder)
+├── lib/props.py   blok visual siap pakai (langit, matahari, bukit, tiang, bendera, burung)
 ├── src/           tepat 1 file scene aktif
+├── examples/      contoh 4 scene (satu video 12 detik), salin ke src/ untuk mencoba
 ├── ref/           gambar atau catatan acuan
 └── output/        hasil MP4
 ```
@@ -36,14 +38,14 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Hasil: `output/scene_01_bendera.mp4`. Instalasi lengkap (Windows, Linux, macOS, Termux) ada di [tutorial.md](tutorial.md).
+Hasil: `output/scene_01_wide.mp4`. Untuk mencoba scene lain, salin dari `examples/` ke `src/` (gantikan file yang ada). Instalasi lengkap (Windows, Linux, macOS, Termux) ada di [tutorial.md](tutorial.md).
 
 ## Cara pakai
 1. Tulis scene dan berkreasilah di [scene.md](scene.md).
 2. Lempar ke agent dan suruh: `baca route.md`.
-3. Agent menulis `src/scene_NN_slug.py`, menandai scene `selesai`.
-4. Kamu menjalankan `python main.py` untuk merender hasilnya.
-5. Lanjut pengerjaan di editor video.
+3. Agent hanya mengeluarkan satu file `scene_NN_slug.py`. Kamu taruh di `src/`.
+4. Kamu menjalankan `python main.py`, memeriksa hasilnya, dan menandai `status= selesai`.
+5. Ulangi untuk scene berikutnya, lalu satukan klip di editor video.
 
 Aturan yang dipatuhi agent ada di [Rules.md](Rules.md): hanya `numpy`, tanpa komentar di kode render, satu file scene di `src/`.
 

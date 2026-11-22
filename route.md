@@ -1,12 +1,10 @@
 # route.md (untuk agent)
 
 1. Baca `Rules.md`.
-2. Baca `scene.md`. Ambil scene bernomor terkecil dengan `status= belum`.
+2. Baca bagian Global di `scene.md`, lalu scene yang disebut user. Bila tidak disebut, ambil nomor terkecil dengan `status= belum`. Baca juga `akhir=` scene sebelumnya agar sambung.
 3. Bila ada `reff=`, lihat file itu di `ref/`.
-4. Tulis `src/scene_NN_slug.py` sesuai `Rules.md`. Hapus file lain di `src/`.
-5. Jalankan `python main.py`. Perbaiki sampai berhasil.
-6. Cek hasil: ambil satu-dua frame dari `output/scene_NN_slug.mp4` dan lihat.
-7. Ubah `status= selesai` pada scene itu, lalu laporkan singkat.
-8. Berhenti. Lanjut ke nomor berikutnya hanya bila user bilang "lanjut" atau "kerjakan semua".
+4. Tulis satu file `scene_NN_slug.py` untuk `src/`. Contoh bentuk yang benar ada di `examples/`.
+5. Keluarkan hanya kode itu (satu blok kode atau satu file), tanpa penjelasan.
 
-Bila prompt scene ambigu, tanya satu pertanyaan, lalu kerjakan.
+Jangan: menjalankan `main.py`, merender atau menganalisis frame, membuat zip, mengubah `scene.md`.
+Bila prompt ambigu, tanya satu pertanyaan, lalu kerjakan.
